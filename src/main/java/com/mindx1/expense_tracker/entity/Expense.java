@@ -1,4 +1,6 @@
 package com.mindx1.expense_tracker.entity;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +15,7 @@ public class Expense {
     private String title;
     private Double amount;
     private String category;
+    private LocalDate date;
 
     
 }
