@@ -1,6 +1,7 @@
 package com.mindx1.expense_tracker.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,8 @@ public class ExpenseService {
 
     public List<Expense> getAllExpenses() {
         return expenseRepository.findAll();
+    }
+    public Optional<Expense> getExpenseById(Long id) {
+        return expenseRepository.findById(id);
     }
 }
