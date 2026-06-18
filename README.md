@@ -65,6 +65,27 @@ Columns:
 
 ## API Endpoints
 
+# Create Expense
+
+POST /expenses
+
+# Get All Expenses
+
+GET /expenses
+
+# Get Expense By ID
+
+GET /expenses/{id}
+
+# Update Expense
+
+PUT /expenses/{id}
+
+# Delete Expense
+
+DELETE /expenses/{id}
+
+
 ### Create Expense
 
 ```
