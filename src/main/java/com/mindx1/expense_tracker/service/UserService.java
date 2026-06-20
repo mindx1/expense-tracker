@@ -1,9 +1,11 @@
 package com.mindx1.expense_tracker.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.mindx1.expense_tracker.entity.User;
 import com.mindx1.expense_tracker.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -15,7 +17,24 @@ public class UserService {
         if(userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exists");
         }
+        user.setPassword(
+        passwordEncoder.encode(user.getPassword())
+        );
         return userRepository.save(user);
     }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    public String loginUser(String email, String password) {
+
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(passwordEncoder.matches(password, user.getPassword())) {
+            return "Login Successful";
+        }
+
+        throw new RuntimeException("Invalid Credentials");
+    }
     
+
 }
