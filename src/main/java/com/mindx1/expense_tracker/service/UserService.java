@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.mindx1.expense_tracker.entity.User;
 import com.mindx1.expense_tracker.repository.UserRepository;
+import com.mindx1.expense_tracker.security.JwtUtil;
 
 @Service
 public class UserService {
@@ -30,7 +31,7 @@ public class UserService {
             .orElseThrow(() -> new RuntimeException("User not found"));
 
         if(passwordEncoder.matches(password, user.getPassword())) {
-            return "Login Successful";
+            return JwtUtil.generateToken(user.getEmail());
         }
 
         throw new RuntimeException("Invalid Credentials");
