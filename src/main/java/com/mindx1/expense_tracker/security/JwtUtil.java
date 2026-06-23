@@ -28,4 +28,13 @@ public class JwtUtil {
                 .signWith(SECRET_KEY)
                 .compact();
     }
+    public static String extractEmail(String token) {
+
+        return Jwts.parser()
+            .verifyWith(SECRET_KEY)
+            .build()
+            .parseSignedClaims(token)
+            .getPayload()
+            .getSubject();
+    }
 }
